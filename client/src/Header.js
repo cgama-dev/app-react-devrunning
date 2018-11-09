@@ -7,6 +7,7 @@ const Header = (props) => {
     return (
         <div>
             <p>
+                <Link to='/'>Home</Link>
                 <Link to='/admin'>Admin</Link>
                 <Link to='/login'>Login</Link>
                 <Link to='/restrito'>Restrito</Link>
@@ -14,8 +15,8 @@ const Header = (props) => {
         </div>
     )
 }
+
 const mapStateToProps = (state) => {
-    console.log(state)
     return {
         auth: state.auth
     }

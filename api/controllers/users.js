@@ -1,4 +1,5 @@
 const login = ({ db, jwt, jwtSecret }) => async(req, res) => {
+  
   const users = await db('users').select().where('email', req.body.email)
   if (users.length === 1) {
     if (users[0].passwd === req.body.passwd) {
