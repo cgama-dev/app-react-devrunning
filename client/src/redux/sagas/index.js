@@ -2,6 +2,8 @@ import { takeLatest, put } from 'redux-saga/effects'
 
 import { Types } from '../actionCreators'
 
+import { getRuns, createRuns } from './runs'
+
 import ActionCreators from '../actionCreators'
 
 import axios from 'axios'
@@ -52,5 +54,7 @@ export default function* rootSagas() {
 
     yield takeLatest(Types.SIGNIN_REQUEST, login)
     yield takeLatest(Types.AUTH_REQUEST, auth)
+    yield takeLatest(Types.GET_RUNS_REQUEST, getRuns)
+    yield takeLatest(Types.CREATE_RUNS_REQUEST, createRuns)
     yield put(ActionCreators.authRequest())
 }

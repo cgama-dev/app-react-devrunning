@@ -2,7 +2,11 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 
-import {Redirect} from 'react-router-dom'
+import { Redirect, Link, Route } from 'react-router-dom'
+
+
+import Home from './Home';
+import Runs from './Runs';
 
 class Restrito extends Component {
 
@@ -11,13 +15,21 @@ class Restrito extends Component {
     }
 
     render() {
-        if(!this.props.auth.isAuth){
+        if (!this.props.auth.isAuth) {
             return <Redirect to='/login' />
-        }   
+        }
         return (
             <div>
-                {JSON.stringify(this.props)}
-                <div> Compoennt Restrito</div>
+                <h1> Compoennt Restrito</h1>
+                <p>
+                    <Link to='/restrito'>Home</Link>
+                    <Link to='/restrito/runs'>Corridas</Link>
+                </p>
+                <div>
+                    <Route exact path={`${this.props.match.path}/`} component={Home} />
+                    <Route  path={`${this.props.match.path}/runs`} component={Runs} />
+                    
+                </div>
             </div>
         )
     }
