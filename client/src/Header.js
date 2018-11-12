@@ -2,17 +2,19 @@ import React from 'react'
 import { connect } from 'react-redux'
 import ActionsCreators from './redux/actionCreators'
 import { Link } from 'react-router-dom'
+import { Menu } from 'semantic-ui-react'
 
 const Header = (props) => {
     return (
-        <div>
+        <Menu>
             <p>
-                <Link to='/'>Home</Link>
-                <Link to='/admin'>Admin</Link>
-                <Link to='/login'>Login</Link>
-                <Link to='/restrito'>Restrito</Link>
+                <Menu.Item>Corridas Online</Menu.Item>
+                <Menu.Item as={Link} to='/'>Home</Menu.Item>
+                <Menu.Item as={Link} to='/admin'>Admin</Menu.Item>
+                <Menu.Item as={Link} to='/login'>Login</Menu.Item>
+                <Menu.Item as={Link} to='/restrito'>Restrito</Menu.Item>
             </p>
-        </div>
+        </Menu>
     )
 }
 
