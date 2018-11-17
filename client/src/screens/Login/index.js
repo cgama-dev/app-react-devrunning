@@ -6,6 +6,7 @@ import { connect } from 'react-redux'
 
 import ActionCretor from './../../redux/actionCreators'
 
+import { Form, Button } from 'semantic-ui-react'
 
 class Login extends Component {
 
@@ -51,19 +52,26 @@ class Login extends Component {
         }
         return (
             <div>
-                <div> Compoennt Login</div>
-                {JSON.stringify(this.props)}
-                <input type="text" name="email" value={this.state.form.email} onChange={this.handleChange('email')} />
-                <input type="password" name="passwd" value={this.state.form.passwd} onChange={this.handleChange('passwd')} />
-                <button type="button" onClick={this.login}>Logar</button>
-                {
-                    this.props.auth.error &&
-                    <p> Erro ao Logar </p>
-                }
-                {
-                    this.props.auth.isAuth &&
-                    <p> Usuário Logado </p>
-                }
+                <div><h1> Entrar</h1></div>
+                <Form>
+                    <Form.Field>
+                        <label>E-mail</label>
+                        <input type="text" name="email" value={this.state.form.email} onChange={this.handleChange('email')} />
+                    </Form.Field>
+                    <Form.Field>
+                        <label>Senha</label>
+                        <input type="password" name="passwd" value={this.state.form.passwd} onChange={this.handleChange('passwd')} />
+                    </Form.Field>
+                    <Button type="button" onClick={this.login}>Logar</Button>
+                    {
+                        this.props.auth.error &&
+                        <p> Erro ao Logar </p>
+                    }
+                    {
+                        this.props.auth.isAuth &&
+                        <p> Usuário Logado </p>
+                    }
+                </Form>
             </div>
         )
     }

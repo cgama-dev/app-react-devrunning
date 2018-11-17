@@ -20,7 +20,6 @@ class App extends Component {
         <div>
           <Router>
             <Container>
-              
               <Route exact path="/" component={Home} />
               <Route path="/admin" component={Admin} />
               <Route path="/restrito" component={Restrito} />

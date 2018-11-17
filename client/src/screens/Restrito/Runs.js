@@ -4,6 +4,8 @@ import ActionCretors from '../../redux/actionCreators'
 
 import { connect } from 'react-redux'
 
+import { Table, Button } from 'semantic-ui-react'
+
 class Runs extends Component {
 
     constructor(props) {
@@ -24,31 +26,29 @@ class Runs extends Component {
         return (
             <div>
                 <h1>Corridas</h1>
-                <button type="button" onClick={() => this.props.create(run)}>Criar Corrida</button>
+                <Button type="button" onClick={() => this.props.create(run)}>Criar Corrida</Button>
 
                 <h1> Lista de Corridas</h1>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Nome</th>
-                            <th>Duração</th>
-                            <th>Distance</th>
-                            <th>Data</th>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <Table celled>
+                    <Table.Header>
+                        <Table.HeaderCell>Nome</Table.HeaderCell>
+                        <Table.HeaderCell>Duração</Table.HeaderCell>
+                        <Table.HeaderCell>Distance</Table.HeaderCell>
+                        <Table.HeaderCell>Data</Table.HeaderCell>
+                    </Table.Header>
+                    <Table.Body>
                         {
                             this.props.runs.data.map((run) => (
-                                <tr key={run.id}>
-                                    <td>{run.friendly_name}</td>
-                                    <td>{run.duration}</td>
-                                    <td>{run.distance}</td>
-                                    <td>{run.created}</td>
-                                </tr>
+                                <Table.Row key={run.id}>
+                                    <Table.Cell>{run.friendly_name}</Table.Cell>
+                                    <Table.Cell>{run.duration}</Table.Cell>
+                                    <Table.Cell>{run.distance}</Table.Cell>
+                                    <Table.Cell>{run.created}</Table.Cell>
+                                </Table.Row>
                             ))
                         }
-                    </tbody>
-                </table>
+                    </Table.Body>
+                </Table>
             </div>
         )
     }

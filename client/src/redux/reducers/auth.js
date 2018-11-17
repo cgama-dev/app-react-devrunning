@@ -44,7 +44,7 @@ export const authRequest = (state = INITIAL_STATE, action) => {
     return {
         ...state,
         isSigningin: true,
-        error: true,
+        error: false,
         errorMessage: action.error
     }
 }
@@ -67,6 +67,16 @@ export const authFailure = (state = INITIAL_STATE, action) => {
     }
 }
 
+export const destroyAuthRequest = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        user:{},
+        isSigningin: false,
+        isAuth: false,
+        error: false
+    }
+}
+
 export const HANDLERS = {
     [Types.SIGNIN_REQUEST]: signinRequest,
     [Types.SIGNIN_SUCCESS]: signinSuccess,
@@ -74,7 +84,9 @@ export const HANDLERS = {
 
     [Types.AUTH_REQUEST]: authRequest,
     [Types.AUTH_SUCCESS]: authSuccess,
-    [Types.AUTH_FAILURE]: authFailure
+    [Types.AUTH_FAILURE]: authFailure,
+
+    [Types.DESTROY_AUTH_SUCCESS]: destroyAuthRequest,
 }
 
 export default createReducer(INITIAL_STATE, HANDLERS)

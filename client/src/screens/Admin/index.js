@@ -2,13 +2,13 @@ import React, { Component } from 'react'
 
 import { connect } from 'react-redux'
 
-import ActionCreators from '../../redux/actionCreators'
-
 import { Route, Redirect } from 'react-router-dom'
 
 import Home from './Home'
 
 import Users from './Users'
+
+import Header from './elements/Header';
 
 class Admin extends Component {
 
@@ -19,22 +19,21 @@ class Admin extends Component {
     render() {
         const { user } = this.props.auth
 
-        if(!this.props.auth.isAuth){
+        if (!this.props.auth.isAuth) {
             return <Redirect to='/login' />
-        }   
-        
-        if(this.props.auth.user.role !== 'admin'){
+        }
+
+        if (this.props.auth.user.role !== 'admin') {
             return <Redirect to='/restrito' />
         }
         return (
             <div>
+                <Header />
                 <div>
                     <Route exact path={`${this.props.match.path}/`} component={Home} />
                     <Route path={`${this.props.match.path}/users`} component={Users} />
                     <Route />
                 </div>
-                {JSON.stringify(this.props.auth)}
-                <div> Compoennt Admin</div>
             </div>
         )
     }
@@ -48,7 +47,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        
+
     }
 }
 

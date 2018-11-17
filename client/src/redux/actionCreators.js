@@ -12,6 +12,9 @@ export const { Types, Creators } = createActions({
     authSuccess: ['user'],
     authFailure: null,
 
+    destroyAuthRequest: null,
+    destroyAuthSuccess: null,
+
     //Corridas
     getRunsRequest: null,
     getRunsSuccess: ['runs'],
