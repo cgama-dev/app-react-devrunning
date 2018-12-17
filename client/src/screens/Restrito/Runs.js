@@ -6,6 +6,12 @@ import { connect } from 'react-redux'
 
 import { Table, Button } from 'semantic-ui-react'
 
+import Distance from './../elements/Distance'
+
+import Duration from './../elements/Duration'
+
+import DateSrt from './../elements/DateSrt'
+
 class Runs extends Component {
 
     constructor(props) {
@@ -41,9 +47,9 @@ class Runs extends Component {
                             this.props.runs.data.map((run) => (
                                 <Table.Row key={run.id}>
                                     <Table.Cell>{run.friendly_name}</Table.Cell>
-                                    <Table.Cell>{run.duration}</Table.Cell>
-                                    <Table.Cell>{run.distance}</Table.Cell>
-                                    <Table.Cell>{run.created}</Table.Cell>
+                                    <Table.Cell> <Duration duration={run.duration} /></Table.Cell>
+                                    <Table.Cell> <Distance distance={run.distance} metric={'metric'} /></Table.Cell>
+                                    <Table.Cell> <DateSrt date={run.created} timezone={'America/Belem'} /></Table.Cell>
                                 </Table.Row>
                             ))
                         }
