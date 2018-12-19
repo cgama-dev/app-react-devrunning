@@ -24,7 +24,7 @@ export function* login(action) {
         yield put(ActionCreators.signinSuccess(user))
 
     } else {
-        
+
         yield put(ActionCreators.signinFailure(login.data.message))
     }
 }
@@ -46,6 +46,22 @@ export function* auth() {
         yield put(ActionCreators.authFailure('no token'))
     }
 }
+
+export function* updateProfile(action) {
+    const token = localStorage.getItem('token')
+    const user = action.user
+    const runs = yield axios.patch(`http://localhost:3001/users/${user.id}`, {
+        unit: action.user.unit,
+        timezone: action.user.timezone
+    },{
+        headers: {
+            Authorization: 'Bearer '+ token
+        }
+    })
+
+    console.log(user)
+}
+
 export function* destroyAuth() {
     localStorage.removeItem('token')
     localStorage.removeItem('user')

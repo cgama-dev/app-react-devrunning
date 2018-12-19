@@ -15,14 +15,20 @@ export const { Types, Creators } = createActions({
     destroyAuthRequest: null,
     destroyAuthSuccess: null,
 
-    //Corridas
+    //Get Corridas
     getRunsRequest: null,
     getRunsSuccess: ['runs'],
     getRunsFailure: null,
-
+    
+    //Create Corridas
     createRunsRequest: ['run'],
     createRunsSuccess: ['run'],
-    createRunsFailure: ['erro']
+    createRunsFailure: ['error'],
+    
+    //Update Corridas
+    updateProfileRequest: ['user'],
+    updateProfileSuccess: ['user'],
+    updateProfileFailure: ['error']
 
 })
 

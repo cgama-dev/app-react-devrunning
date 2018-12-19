@@ -7,6 +7,7 @@ import { Redirect, Link, Route } from 'react-router-dom'
 
 import Home from './Home';
 import Runs from './Runs';
+import MyAccount from './MyAccount';
 import Header from './elements/Header';
 
 class Restrito extends Component {
@@ -25,7 +26,7 @@ class Restrito extends Component {
                 <div>
                     <Route exact path={`${this.props.match.path}/`} component={Home} />
                     <Route  path={`${this.props.match.path}/runs`} component={Runs} />
-                    
+                    <Route  path={`${this.props.match.path}/my-account`} component={MyAccount} />
                 </div>
             </div>
         )
