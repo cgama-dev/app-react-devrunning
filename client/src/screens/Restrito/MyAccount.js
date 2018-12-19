@@ -4,7 +4,7 @@ import ActionCretors from '../../redux/actionCreators'
 
 import { connect } from 'react-redux'
 
-import { Table, Button } from 'semantic-ui-react'
+import { Button } from 'semantic-ui-react'
 
 import timezones from 'moment-timezone/data/meta/latest'
 

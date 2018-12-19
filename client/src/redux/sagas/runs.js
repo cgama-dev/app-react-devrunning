@@ -8,7 +8,7 @@ import ActionsCreators from '../actionCreators'
 export function* getRuns() {
     const token = localStorage.getItem('token')
 
-    const runs = yield axios.get('http://localhost:3001/runs', {
+    const runs = yield axios.get('http://localhost:3005/runs', {
         headers: {
             Authorization: 'Bearer '+ token
         }
@@ -20,7 +20,7 @@ export function* getRuns() {
 export function* createRuns(action) {
     const token = localStorage.getItem('token')
     
-    const runs = yield axios.post('http://localhost:3001/runs', action.run, {
+    yield axios.post('http://localhost:3005/runs', action.run, {
         headers: {
             Authorization: 'Bearer '+ token
         }

@@ -17,7 +17,7 @@ class Admin extends Component {
         console.log(props)
     }
     render() {
-        const { user } = this.props.auth
+        // const { user } = this.props.auth
 
         if (!this.props.auth.isAuth) {
             return <Redirect to='/login' />

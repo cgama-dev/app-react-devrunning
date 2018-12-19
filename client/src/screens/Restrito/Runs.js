@@ -14,10 +14,6 @@ import DateSrt from './../elements/DateSrt'
 
 class Runs extends Component {
 
-    constructor(props) {
-        super(props)
-    }
-
     componentDidMount() {
         console.log(this.props.load())
     }
@@ -48,8 +44,8 @@ class Runs extends Component {
                                 <Table.Row key={run.id}>
                                     <Table.Cell>{run.friendly_name}</Table.Cell>
                                     <Table.Cell> <Duration duration={run.duration} /></Table.Cell>
-                                    <Table.Cell> <Distance distance={run.distance} metric={'metric'} /></Table.Cell>
-                                    <Table.Cell> <DateSrt date={run.created} timezone={'America/Belem'} /></Table.Cell>
+                                    <Table.Cell> <Distance distance={run.distance} metric={this.props.auth.user.unit} /></Table.Cell>
+                                    <Table.Cell> <DateSrt date={run.created} timezone={this.props.auth.user.timezone} /></Table.Cell>
                                 </Table.Row>
                             ))
                         }
@@ -62,7 +58,8 @@ class Runs extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        runs: state.runs
+        runs: state.runs,
+        auth: state.auth
     }
 }
 

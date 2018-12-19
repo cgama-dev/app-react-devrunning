@@ -1,4 +1,6 @@
-import { takeLatest, put } from 'redux-saga/effects'
+import {
+    put
+} from 'redux-saga/effects'
 
 import ActionCreators from '../actionCreators'
 
@@ -9,7 +11,7 @@ import jwtDecode from 'jwt-decode'
 export function* login(action) {
     let token = localStorage.getItem('token')
 
-    const login = yield axios.post('http://localhost:3001/users/login', {
+    const login = yield axios.post('http://localhost:3005/users/login', {
         email: action.email,
         passwd: action.passwd
     })
@@ -34,9 +36,13 @@ export function* auth() {
 
     if (token) {
         try {
-
-            const user = jwtDecode(token)
-            yield put(ActionCreators.authSuccess(user))
+            // const user = jwtDecode(token)
+            const user = yield axios.get('http://localhost:3005/users/me', {
+                headers: {
+                    Authorization: 'Bearer ' + token
+                }
+            })
+            yield put(ActionCreators.authSuccess(user.data))
         } catch (err) {
 
             yield put(ActionCreators.authFailure('invalide token'))
@@ -49,17 +55,16 @@ export function* auth() {
 
 export function* updateProfile(action) {
     const token = localStorage.getItem('token')
-    const user = action.user
-    const runs = yield axios.patch(`http://localhost:3001/users/${user.id}`, {
-        unit: action.user.unit,
-        timezone: action.user.timezone
-    },{
+    const userToSave = {
+        ...action.user
+    }
+    const user = yield axios.patch(`http://localhost:3005/users/${action.user.id}`, userToSave, {
         headers: {
-            Authorization: 'Bearer '+ token
+            Authorization: 'Bearer ' + token
         }
     })
 
-    console.log(user)
+    yield put(ActionCreators.updateProfileSuccess(userToSave))
 }
 
 export function* destroyAuth() {

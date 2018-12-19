@@ -7,6 +7,7 @@ export const INITIAL_STATE = {
     isSigningin: false,
     isSaving: false,
     user: {},
+    saved: false,
     error: false,
     errorMessage: ''
 }
@@ -83,16 +84,27 @@ export const updateProfileRequest = (state = INITIAL_STATE, action) => {
         ...state,
         isSaving: true,
         error: false,
-        errorMessage: ''
+        errorMessage: '',
+        saved: false
     }
 }
 
 export const updateProfileSuccess = (state = INITIAL_STATE, action) => {
+
+    const newUser = {
+        ...state.user
+    }
+
+    Object.keys(action.user).forEach(key => {
+        newUser[key] = action.user[key]
+    })
+
     return {
         ...state,
-        user: action.user,
+        user: newUser,
         isSaving: false,
-        error: false
+        error: false,
+        saved: true
     }
 }
 
@@ -101,7 +113,8 @@ export const updateProfileFailure = (state = INITIAL_STATE, action) => {
         ...state,
         isSaving: false,
         error: true,
-        errorMessage: action.error
+        errorMessage: action.error,
+        saved: false
     }
 }
 
