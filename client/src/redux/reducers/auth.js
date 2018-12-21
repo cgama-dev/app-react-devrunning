@@ -117,6 +117,13 @@ export const updateProfileFailure = (state = INITIAL_STATE, action) => {
         saved: false
     }
 }
+export const updateProfileReset = (state = INITIAL_STATE, action) => {
+    return {
+        ...state,
+        error: false,
+        saved: false
+    }
+}
 
 export const HANDLERS = {
     [Types.SIGNIN_REQUEST]: signinRequest,
@@ -131,7 +138,8 @@ export const HANDLERS = {
 
     [Types.UPDATE_PROFILE_REQUEST]: updateProfileRequest,
     [Types.UPDATE_PROFILE_SUCCESS]: updateProfileSuccess,
-    [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure
+    [Types.UPDATE_PROFILE_FAILURE]: updateProfileFailure,
+    [Types.UPDATE_PROFILE_RESET]: updateProfileReset
 
 }
 

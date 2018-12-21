@@ -26,6 +26,7 @@ export const { Types, Creators } = createActions({
     createRunsFailure: ['error'],
     
     //Update Corridas
+    updateProfileReset:null,
     updateProfileRequest: ['user'],
     updateProfileSuccess: ['user'],
     updateProfileFailure: ['error']
