@@ -58,6 +58,8 @@ export function* updateProfile(action) {
     const userToSave = {
         ...action.user
     }
+
+    console.log("ACTION",action)
     const user = yield axios.patch(`http://localhost:3005/users/${action.user.id}`, userToSave, {
         headers: {
             Authorization: 'Bearer ' + token

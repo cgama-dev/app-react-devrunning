@@ -34,10 +34,11 @@ class MyAccount extends Component {
     }
 
     handleUpdate = () => {
+        console.log(this.props.auth)
         this.props.update({
             unit: this.state.unit,
             timezone: this.state.timezone,
-            id: this.props.auth.id
+            id: this.props.auth.user.id
         })
     }
 

@@ -95,9 +95,12 @@ export const updateProfileSuccess = (state = INITIAL_STATE, action) => {
         ...state.user
     }
 
+    console.log("Old", state.user)
+
     Object.keys(action.user).forEach(key => {
         newUser[key] = action.user[key]
     })
+    console.log("New", newUser)
 
     return {
         ...state,
