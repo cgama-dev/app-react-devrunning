@@ -29,7 +29,12 @@ export const { Types, Creators } = createActions({
     updateProfileReset:null,
     updateProfileRequest: ['user'],
     updateProfileSuccess: ['user'],
-    updateProfileFailure: ['error']
+    updateProfileFailure: ['error'],
+
+    createProfileReset: null,
+    createProfileRequest: ['user'],
+    createProfileSuccess: ['user'],
+    createProfileFailure: ['error']
 
 })
 
