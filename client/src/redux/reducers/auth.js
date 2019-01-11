@@ -67,9 +67,7 @@ export const authFailure = (state = INITIAL_STATE, action) => {
     return {
         ...state,
         isSigningin: false,
-        isAuth: false,
-        error: true,
-        errorMessage: action.error
+        isAuth: false
     }
 }
 
@@ -99,12 +97,9 @@ export const updateProfileSuccess = (state = INITIAL_STATE, action) => {
         ...state.user
     }
 
-    console.log("Old", state.user)
-
     Object.keys(action.user).forEach(key => {
         newUser[key] = action.user[key]
     })
-    console.log("New", newUser)
 
     return {
         ...state,
@@ -147,13 +142,9 @@ export const createProfileSuccess = (state = INITIAL_STATE, action) => {
         ...state.user
     }
 
-    console.log("Old", state.user)
-
     Object.keys(action.user).forEach(key => {
         newUser[key] = action.user[key]
     })
-    console.log("New", newUser)
-
     return {
         ...state,
         user: newUser,

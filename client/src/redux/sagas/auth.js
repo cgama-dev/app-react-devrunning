@@ -59,7 +59,7 @@ export function* updateProfile(action) {
         ...action.user
     }
 
-    console.log("ACTION",action)
+
     const user = yield axios.patch(`http://localhost:3005/users/${action.user.id}`, userToSave, {
         headers: {
             Authorization: 'Bearer ' + token
@@ -70,14 +70,22 @@ export function* updateProfile(action) {
 }
 
 export function* createProfile(action) {
-    
+
     const userToSave = {
         ...action.user
     }
 
     const user = yield axios.post(`http://localhost:3005/users`, userToSave)
 
-    yield put(ActionCreators.createProfileSuccess(userToSave))
+    if (user.data.error) {
+
+        yield put(ActionCreators.createProfileFailure(user.data))
+    } else {
+
+        yield put(ActionCreators.createProfileSuccess(userToSave))
+
+        yield put(ActionCreators.signinRequest(userToSave.email, userToSave.passwd))
+    }
 }
 
 export function* destroyAuth() {

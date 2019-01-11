@@ -8,6 +8,8 @@ import { Button, Form, Segment } from 'semantic-ui-react'
 
 import timezones from 'moment-timezone/data/meta/latest'
 
+
+
 class MyAccount extends Component {
 
     constructor(props) {
@@ -43,8 +45,10 @@ class MyAccount extends Component {
     }
 
     render() {
+       
         return (
             <div>
+            
                 <h1>Minha Conta</h1>
                 {
                     this.props.auth.saved &&
