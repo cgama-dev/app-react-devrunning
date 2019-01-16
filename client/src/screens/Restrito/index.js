@@ -4,12 +4,12 @@ import { connect } from 'react-redux'
 
 import { Redirect, Route } from 'react-router-dom'
 
-
 import Home from './Home';
 import Runs from './Runs';
 import MyAccount from './MyAccount';
 import ChangePassword from './ChangePassword';
 import Header from './elements/Header';
+import CreateRun from './CreateRun';
 
 class Restrito extends Component {
 
@@ -28,6 +28,7 @@ class Restrito extends Component {
                     <Route  path={`${this.props.match.path}/runs`} component={Runs} />
                     <Route  path={`${this.props.match.path}/my-account`} component={MyAccount} />
                     <Route  path={`${this.props.match.path}/change-password`} component={ChangePassword} />
+                    <Route  path={`${this.props.match.path}/create-run`} component={CreateRun} />
                 </div>
             </div>
         )

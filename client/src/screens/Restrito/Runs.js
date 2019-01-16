@@ -4,6 +4,8 @@ import ActionCretors from '../../redux/actionCreators'
 
 import { connect } from 'react-redux'
 
+import { Link } from 'react-router-dom'
+
 import { Table, Button } from 'semantic-ui-react'
 
 import Distance from './../elements/Distance'
@@ -18,17 +20,18 @@ class Runs extends Component {
         console.log(this.props.load())
     }
 
+    handleRedirectCreateRun() {
+        this.setState({
+            createrun: true
+        })
+    }
+
     render() {
-        const run = {
-            friendly_name: 'run de test',
-            duration: 100,
-            distance: 100,
-            created: '2018-01-01 00:00:00'
-        }
+
         return (
             <div>
                 <h1>Corridas</h1>
-                <Button type="button" onClick={() => this.props.create(run)}>Criar Corrida</Button>
+                <Button as={Link} to={'/restrito/create-run'} type="button">Criar Corrida</Button>
 
                 <h1> Lista de Corridas</h1>
                 <Table celled>
@@ -53,6 +56,7 @@ class Runs extends Component {
                 </Table>
             </div>
         )
+
     }
 }
 
@@ -65,8 +69,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        load: () => dispatch(ActionCretors.getRunsRequest()),
-        create: (run) => dispatch(ActionCretors.createRunsRequest(run))
+        load: () => dispatch(ActionCretors.getRunsRequest())
     }
 }
 
