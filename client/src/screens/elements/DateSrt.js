@@ -5,8 +5,6 @@ const DateStr = ({date, timezone}) => {
 
     const d = moment.tz(date, "GMT")
     
-    console.log(date, timezone)
-
     const d2 = d.clone().tz(timezone)
 
     
