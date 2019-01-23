@@ -8,6 +8,8 @@ import 'input-moment/dist/input-moment.css'
 import moment from 'moment'
 import momentTz from 'moment-timezone'
 
+import { Redirect } from 'react-router-dom'
+
 class CreateRun extends Component {
     constructor(props) {
         super(props)
@@ -47,23 +49,19 @@ class CreateRun extends Component {
 
     render() {
 
+        if(this.props.runs.saved){
+            return <Redirect to='/restrito/runs' />
+        }
+
         return (
             <div>
                 <h1>Criar Corrida</h1>
                 {
-                    this.state.error === 'length' &&
-                    <Segment color='red'> Senha possui menos que 6 caracteres</Segment>
+                    this.props.runs.saved &&
+                    <Segment color='green'> Corrida criada com sucesso</Segment>
                 }
                 {
-                    this.state.error === 'equal' &&
-                    <Segment color='red'> As senhas não correspondem</Segment>
-                }
-                {
-                    this.props.auth.saved &&
-                    <Segment color='green'> Senha alterada com sucesso</Segment>
-                }
-                {
-                    !this.props.auth.saved &&
+                    !this.props.runs.saved &&
                     <Form>
                         <Form.Field>
                             <label>Nome corrida:</label>
@@ -95,15 +93,17 @@ class CreateRun extends Component {
 }
 
 const mapStateToProps = (state) => {
+    console.log(state)
     return {
-        auth: state.auth
+        auth: state.auth,
+        runs: state.runs
     }
 }
 
 const mapDispatchToProps = (dispatch) => {
     return {
         create: (run) => dispatch(ActionCretors.createRunsRequest(run)),
-        reset: () => dispatch(ActionCretors.updateProfileReset())
+        reset: () => dispatch(ActionCretors.createRunsReset())
     }
 }
 

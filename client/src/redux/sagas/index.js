@@ -6,7 +6,7 @@ import ActionCreators from '../actionCreators'
 
 import { login, auth, destroyAuth, updateProfile, createProfile } from './auth'
 
-import { getRuns, createRuns } from './runs'
+import { getRuns, createRuns, deleteRuns } from './runs'
 
 
 export default function* rootSagas() {
@@ -15,6 +15,7 @@ export default function* rootSagas() {
     yield takeLatest(Types.AUTH_REQUEST, auth)
     yield takeLatest(Types.GET_RUNS_REQUEST, getRuns)
     yield takeLatest(Types.CREATE_RUNS_REQUEST, createRuns)
+    yield takeLatest(Types.DELETE_RUNS_REQUEST, deleteRuns)
     yield takeLatest(Types.UPDATE_PROFILE_REQUEST, updateProfile)
     yield takeLatest(Types.CREATE_PROFILE_REQUEST, createProfile)
     yield takeLatest(Types.DESTROY_AUTH_REQUEST, destroyAuth)

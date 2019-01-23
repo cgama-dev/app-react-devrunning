@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
 
-import { Table, Button } from 'semantic-ui-react'
+import { Table, Button, Segment } from 'semantic-ui-react'
 
 import Distance from './../elements/Distance'
 
@@ -17,7 +17,7 @@ import DateSrt from './../elements/DateSrt'
 class Runs extends Component {
 
     componentDidMount() {
-        console.log(this.props.load())
+        this.props.load()
     }
 
     handleRedirectCreateRun() {
@@ -34,26 +34,36 @@ class Runs extends Component {
                 <Button as={Link} to={'/restrito/create-run'} type="button">Criar Corrida</Button>
 
                 <h1> Lista de Corridas</h1>
-                <Table celled>
-                    <Table.Header>
-                        <Table.HeaderCell>Nome</Table.HeaderCell>
-                        <Table.HeaderCell>Duração</Table.HeaderCell>
-                        <Table.HeaderCell>Distance</Table.HeaderCell>
-                        <Table.HeaderCell>Data</Table.HeaderCell>
-                    </Table.Header>
-                    <Table.Body>
-                        {
-                            this.props.runs.data.map((run) => (
-                                <Table.Row key={run.id}>
-                                    <Table.Cell>{run.friendly_name}</Table.Cell>
-                                    <Table.Cell> <Duration duration={run.duration} /></Table.Cell>
-                                    <Table.Cell> <Distance distance={run.distance} metric={this.props.auth.user.unit} /></Table.Cell>
-                                    <Table.Cell> <DateSrt date={run.created} timezone={this.props.auth.user.timezone} /></Table.Cell>
-                                </Table.Row>
-                            ))
-                        }
-                    </Table.Body>
-                </Table>
+                {
+                    !this.props.runs.isLoading && this.props.runs.data.length === 0 &&
+                    <Segment color='blue'> Nenhuma corrida cadastrada.</Segment>
+                }
+                {!this.props.runs.isLoading && this.props.runs.data.length > 0 &&
+                    <Table celled>
+                        <Table.Header>
+                            <Table.Row>
+                                <Table.HeaderCell>Nome</Table.HeaderCell>
+                                <Table.HeaderCell>Duração</Table.HeaderCell>
+                                <Table.HeaderCell>Distance</Table.HeaderCell>
+                                <Table.HeaderCell>Data</Table.HeaderCell>
+                                <Table.HeaderCell>Ações</Table.HeaderCell>
+                            </Table.Row>
+                        </Table.Header>
+                        <Table.Body>
+                            {
+                                this.props.runs.data.map((run) => (
+                                    <Table.Row key={run.id}>
+                                        <Table.Cell>{run.friendly_name}</Table.Cell>
+                                        <Table.Cell> <Duration duration={run.duration} /></Table.Cell>
+                                        <Table.Cell> <Distance distance={run.distance} metric={this.props.auth.user.unit} /></Table.Cell>
+                                        <Table.Cell> <DateSrt date={run.created} timezone={this.props.auth.user.timezone} /></Table.Cell>
+                                        <Table.Cell> <Button basic color='red' onClick={() => this.props.delete(run.id)}> Exluir corrida </Button> </Table.Cell>
+                                    </Table.Row>
+                                ))
+                            }
+                        </Table.Body>
+                    </Table>
+                }
             </div>
         )
 
@@ -69,7 +79,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        load: () => dispatch(ActionCretors.getRunsRequest())
+        load: () => dispatch(ActionCretors.getRunsRequest()),
+        delete: (id) => dispatch(ActionCretors.deleteRunsRequest(id))
     }
 }
 
