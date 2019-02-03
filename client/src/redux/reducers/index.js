@@ -4,10 +4,13 @@ import auth from './auth'
 
 import runs from './runs'
 
+import users from './users'
+
 
 const rootReducer = combineReducers({
     auth,
-    runs
+    runs,
+    users
 })
 
 

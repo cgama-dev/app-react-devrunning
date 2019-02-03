@@ -8,6 +8,8 @@ import Home from './Home'
 
 import Users from './Users'
 
+import Runs from './Runs'
+
 import Header from './elements/Header';
 
 class Admin extends Component {
@@ -32,6 +34,7 @@ class Admin extends Component {
                 <div>
                     <Route exact path={`${this.props.match.path}/`} component={Home} />
                     <Route path={`${this.props.match.path}/users`} component={Users} />
+                    <Route path={`${this.props.match.path}/runs`} component={Runs} />
                     <Route />
                 </div>
             </div>

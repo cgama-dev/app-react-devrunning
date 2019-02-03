@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import { Link } from 'react-router-dom'
 
-import { Table, Button, Segment } from 'semantic-ui-react'
+import { Table, Button, Segment, Label } from 'semantic-ui-react'
 
 import Distance from './../elements/Distance'
 
@@ -53,7 +53,10 @@ class Runs extends Component {
                             {
                                 this.props.runs.data.map((run) => (
                                     <Table.Row key={run.id}>
-                                        <Table.Cell>{run.friendly_name}</Table.Cell>
+                                        <Table.Cell>
+                                            {run.friendly_name} <br/>
+                                            <Label>{run.name}</Label>
+                                        </Table.Cell>
                                         <Table.Cell> <Duration duration={run.duration} /></Table.Cell>
                                         <Table.Cell> <Distance distance={run.distance} metric={this.props.auth.user.unit} /></Table.Cell>
                                         <Table.Cell> <DateSrt date={run.created} timezone={this.props.auth.user.timezone} /></Table.Cell>
@@ -79,7 +82,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        load: () => dispatch(ActionCretors.getRunsRequest(false)),
+        load: () => dispatch(ActionCretors.getRunsRequest(true)),
         delete: (id) => dispatch(ActionCretors.deleteRunsRequest(id))
     }
 }

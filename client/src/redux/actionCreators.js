@@ -16,16 +16,26 @@ export const { Types, Creators } = createActions({
     destroyAuthSuccess: null,
 
     //Get Corridas
-    getRunsRequest: null,
+    getRunsRequest: ['admin'],
     getRunsSuccess: ['runs'],
     getRunsFailure: null,
+
+    //Get Usuários
+    getUsersRequest: null,
+    getUsersSuccess: ['users'],
+    getUsersFailure: null,
+
+    //Deletando Usuaŕios
+    deleteUsersRequest: ['id'],
+    deleteUsersSuccess: ['id'],
+    deleteUsersFailure: ['error'],
 
     //Create Corridas
     createRunsReset: null,
     createRunsRequest: ['run'],
     createRunsSuccess: ['run'],
     createRunsFailure: ['error'],
-    
+
     //Delete Corridas
     deleteRunsRequest: ['id'],
     deleteRunsSuccess: ['id'],

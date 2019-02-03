@@ -4,10 +4,16 @@ import { put } from 'redux-saga/effects'
 
 import ActionsCreators from '../actionCreators'
 
-export function* getRuns() {
+export function* getRuns(action) {
     const token = localStorage.getItem('token')
 
-    const runs = yield axios.get('http://localhost:3005/runs', {
+    let filter = ''
+
+    if (action.admin) {
+        filter = "?admin=true"
+    }
+
+    const runs = yield axios.get(`http://localhost:3005/runs${filter}`, {
         headers: {
             Authorization: 'Bearer ' + token
         }
