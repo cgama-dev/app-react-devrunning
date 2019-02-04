@@ -57,7 +57,10 @@ class Users extends Component {
                                         <Table.Cell>
                                             {user.email}
                                         </Table.Cell>
-                                        <Table.Cell> <Button basic color='red' onClick={() => this.props.delete(user.id)}> Exluir usuário </Button> </Table.Cell>
+                                        <Table.Cell>
+                                            <Button basic color='blue' as={Link} to={`/admin/users/${user.id}/edit`}> Editar  </Button>
+                                            <Button basic color='red' onClick={() => this.props.delete(user.id)}> Exluir </Button>
+                                        </Table.Cell>
                                     </Table.Row>
                                 ))
                             }

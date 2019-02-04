@@ -24,6 +24,13 @@ export const { Types, Creators } = createActions({
     getUsersRequest: null,
     getUsersSuccess: ['users'],
     getUsersFailure: null,
+    
+    
+    //Get Usuários By Id
+    getUserByIdRequest: ['id'],
+    getUserByIdSuccess: ['user'],
+    getUserByIdFailure: null,
+
 
     //Deletando Usuaŕios
     deleteUsersRequest: ['id'],
@@ -46,6 +53,11 @@ export const { Types, Creators } = createActions({
     updateProfileRequest: ['user'],
     updateProfileSuccess: ['user'],
     updateProfileFailure: ['error'],
+
+    updateUserReset: null,
+    updateUserRequest: ['user'],
+    updateUserSuccess: ['user'],
+    updateUserFailure: ['error'],
 
     createProfileReset: null,
     createProfileRequest: ['user'],

@@ -8,7 +8,7 @@ import { login, auth, destroyAuth, updateProfile, createProfile } from './auth'
 
 import { getRuns, createRuns, deleteRuns } from './runs'
 
-import { getUsers, deleteUsers } from './users'
+import { getUsers, getUserById, deleteUsers, updateUser } from './users'
 
 
 export default function* rootSagas() {
@@ -28,5 +28,7 @@ export default function* rootSagas() {
     
     //Users
     yield takeLatest(Types.GET_USERS_REQUEST, getUsers)
+    yield takeLatest(Types.GET_USER_BY_ID_REQUEST, getUserById)
     yield takeLatest(Types.DELETE_USERS_REQUEST, deleteUsers)
+    yield takeLatest(Types.UPDATE_USER_REQUEST, updateUser)
 } 
