@@ -1,59 +1,42 @@
 import axios from 'axios'
 
-import { put } from 'redux-saga/effects'
+import { put, call } from 'redux-saga/effects'
 
 import ActionsCreators from '../actionCreators'
 
-
-export function* getUsers() {
+export const getUsers = ({ api }) => function* () {
     const token = localStorage.getItem('token')
 
-    const users = yield axios.get(`http://localhost:3005/users`, {
-        headers: {
-            Authorization: 'Bearer ' + token
-        }
-    })
+    const users = yield call(api.getUsers)
 
     yield put(ActionsCreators.getUsersSuccess(users.data))
 }
 
-export function* getUserById(action) {
-    const token = localStorage.getItem('token')
-
+export const getUserById = ({ api }) => function* (action) {
     const idUser = action.id
 
-    const user = yield axios.get(`http://localhost:3005/users/${idUser}`, {
-        headers: {
-            Authorization: 'Bearer ' + token
-        }
-    })
+    const user = yield call(api.getUserById, idUser)
 
     yield put(ActionsCreators.getUserByIdSuccess(user.data))
 }
 
-export function* deleteUsers(action) {
+export const deleteUsers = ({ api }) => function* (action) {
     const token = localStorage.getItem('token')
 
-    yield axios.delete(`http://localhost:3005/users/${action.id}`, {
-        headers: {
-            Authorization: 'Bearer ' + token
-        }
-    })
+    const idUser = action.id
 
-    yield put(ActionsCreators.deleteUsersSuccess(action.id))
+    yield call(api.deleteUsers, idUser)
+
+    yield put(ActionsCreators.deleteUsersSuccess(idUser))
 }
 
-export function* updateUser(action) {
+export const updateUser = ({ api }) => function* (action) {
     const token = localStorage.getItem('token')
     const userToSave = {
         ...action.user
     }
 
-    yield axios.patch(`http://localhost:3005/users/${action.user.id}`, userToSave, {
-        headers: {
-            Authorization: 'Bearer ' + token
-        }
-    })
+    yield call(api.updateUsers, action.user.id, userToSave)
 
     yield put(ActionsCreators.updateUserSuccess(userToSave))
 }

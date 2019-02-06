@@ -21,6 +21,7 @@ import { Redirect } from 'react-router-dom'
         }
 
         componentDidMount() {
+            this.props.reset()
             this.props.load(this.props.match.params.id)
         }
 
